@@ -1,0 +1,19 @@
+<h1> Posts </h1>
+<h2> <%= user_signed_in? ? "You are signed in" : "You are NOT signed in" %> </h2>
+<ul>
+  <% if @posts.present? %>
+    <% @posts.each do |post| %>
+      <li>
+        <%= link_to post.title, posts_path(post) %> - by
+        <%= user_signed_in? ? (post.user.name || "User") : "anomymous" %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<% if user_signed_in? %>
+  <%= button_to("Create Post", new_post_path, method: :get) %>
+  <%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
+<% else %>
+  <%= link_to "Sign In!", new_user_session_path %>
+<% end %>
