@@ -1,17 +1,13 @@
-<h1> Post <%= @post.id %> </h1>
-<h2> <%= user_signed_in? ? "You are signed in" : "You are NOT signed in" %> </h2>
-<ul>
-  <% if @post.present? %>
-      <li>
-        <%= @post.title %>
-        <%= @post.body %> - by
-        <%= user_signed_in? ? (post.user.name || "User") : "anomymous" %>
-      </li>
-  <% end %>
-</ul>
-
-<% if user_signed_in? %>
-  <%= button_to("Back to Posts", posts_path, method: :get) %>
-<% else %>
-  <%= link_to "Sign In!", new_user_session_path %>
+<h1>
+  <%= @post.title %>
+</h1>
+<h2>
+  by <%= user_signed_in? ? @post.user.name || "User" : "anonymous" %>
+</h2>
+<p>
+  <%= @post.body %>
+</p>
+<%= button_to("Back to Home", posts_path, method: :get) %>
+<% if !user_signed_in? %>
+  <%= link_to "Sign in to see author details!", new_user_session_path %>
 <% end %>

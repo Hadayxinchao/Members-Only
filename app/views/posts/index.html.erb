@@ -4,7 +4,7 @@
   <% if @posts.present? %>
     <% @posts.each do |post| %>
       <li>
-        <%= link_to post.title, posts_path(post) %> - by
+        <%= link_to post.title, post_path(post) %> - by
         <%= user_signed_in? ? (post.user.name || "User") : "anomymous" %>
       </li>
     <% end %>
