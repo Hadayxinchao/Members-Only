@@ -1,0 +1,28 @@
+<% if @post.errors.any? %>
+  <div id="error_explaination">
+    <h2>
+      <%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:
+    </h2>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h1>
+  Hello <%= current_user[:name] %>
+</h1>
+<%= form_with model: @post do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title, placeholder: "Title of your Post" %>
+  </div>
+  <br>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <br>
+  <%= form.submit %>
+<% end %>
